@@ -1,0 +1,25 @@
+date,event_name,category,severity
+2015-06-08,Post-Election Market Uncertainty,Political/Economic,High
+2015-11-24,Russia Jet Downed,Geopolitical,High
+2016-05-05,PM Davutoglu Resignation/Removal,Domestic Political,High
+2016-07-15,Coup Attempt,Domestic Political,Extreme
+2017-04-16,Constitutional Referendum,Domestic Political,Medium
+2018-08-10,US-Turkey Currency Crisis,Monetary Policy,Extreme
+2019-03-31,Local Elections,Domestic Political,Medium
+2020-03-11,COVID-19 Pandemic Declaration,Global Health,Extreme
+2021-03-12,Economic Reform Package Unveiled,Structural Reform,Medium
+2021-03-20,CBRT Governor Dismissal (Agbal),Monetary Policy,Extreme
+2021-12-20,KKM Scheme Announcement,Monetary Policy,High
+2022-02-24,Russia-Ukraine War Starts,Global Geopolitical,High
+2022-12-14,Ekrem Imamoglu Sentencing/Political Ban,Domestic Political,Medium
+2023-02-06,Kahramanmaras Earthquake,Natural Disaster,Extreme
+2023-05-14,General Elections Round 1,Domestic Political,High
+2023-05-28,General Elections Round 2,Domestic Political,High
+2023-06-22,Pivot to Orthodox Policy,Monetary Policy,Medium
+2023-10-07,Gaza Conflict Begins,Global Geopolitical,Medium
+2025-01-15,Major Interest Rate Cut (500bps),Monetary Policy,High
+2025-03-20,Emergency Overnight Rate Hike (46%),Monetary Policy,Extreme
+2026-01-05,Regional Conflict Escalation,Geopolitical,High
+2026-01-22,CBRT Rate Cut to 37%,Monetary Policy,Medium
+2026-02-03,Inflation Hits 4-Year Low (30.65%),Economic Indicator,High
+2026-03-03,Unexpected Inflation Spike (31.53%),Economic Indicator,Medium
