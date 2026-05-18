@@ -1,0 +1,10 @@
+evds
+yfinance
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+statsmodels
+scikit-learn
+imbalanced-learn
