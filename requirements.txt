@@ -8,3 +8,4 @@ scipy
 statsmodels
 scikit-learn
 imbalanced-learn
+arch
