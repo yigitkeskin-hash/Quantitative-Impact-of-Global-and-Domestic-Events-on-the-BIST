@@ -3,9 +3,9 @@
 ---
 
 ## 1. Motivation
-Emerging financial markets, particularly the Borsa Istanbul (BIST 100), operate within high-volatility microstructures characterized by acute sensitivity to shifting macro-environments. Volatility and asset return anomalies do not develop inside a vacuum; they are tightly bound to sudden exogenous shocks (such as geopolitical altercations, natural disasters, or global healthcare emergencies) and structural endogenous pivots (such as sudden adjustments to interest rates or currency interventions by the central bank).
+Emerging equity markets, particularly Borsa Istanbul (BIST 100), exhibit high volatility and acute sensitivity to macroeconomic environment shifts. Financial market shocks and volatility spikes do not occur in isolation; they are closely tied to sudden exogenous events (such as geopolitical conflicts, natural disasters, and global crises) as well as domestic policy turns (including sudden interest rate adjustments and foreign exchange interventions).
 
-This project investigates how major domestic and global turning points quantitatively shape the BIST 100 index from 2015 to the present. Rather than analyzing asset movements through simple isolated trendlines, this study applies a thorough data science pipeline to evaluate whether external macroeconomic crises structurally deform market return distributions and risk variance. It further tests the predictive boundaries of standard machine learning paradigms to observe whether complex models can accurately forecast directional tail-risk or out-of-sample asset returns under systemic stress.
+This project investigates how major domestic and global turning points quantitatively impact the BIST 100 index from 2015 to the present. Rather than examining price trends in isolation, this study establishes an end-to-end data science pipeline to evaluate whether macroeconomic shocks structurally alter market return distributions, variance, and recovery dynamics. Furthermore, it explores the empirical boundaries of predictive machine learning models in forecasting future daily returns and directional risk under crisis conditions.
 
 ---
 
@@ -102,14 +102,14 @@ The project successfully modeled emerging market dynamics, proving that while ma
 | **H4: Hangover Effect** | Lagged Mann-Whitney U | $T+1$ Return Shift | ❌ **Not Supported** | `6.9933e-01` | The BIST 100 operates with high efficiency. Shock vectors are absorbed within a single trading day; no risk spillover carries into Day $T+1$. |
 
 ### Machine Learning Performance Matrix
-- **Continuous Regression (Level Prediction):** Attempting to predict the exact numerical return profile percentage yielded poor results, matching the core principles of the Efficient Market Hypothesis. The Random Forest Regressor scored a negative $R^2$ of **$-0.071$** (RMSE: 1.805%), while Linear Regression dropped to an $R^2$ of **$-1.404$** (RMSE: 2.704%). This indicates that complex models overfit systemic noise and fail to beat a simple historical mean baseline.
-- **Categorical Risk Classification:** Shifting to a classification task to isolate directional shocks provided enhanced risk management parameters. The advanced Random Forest model optimized with synthetic `SMOTE` oversampling successfully outperformed the baseline linear model, expanding the overall Area Under the Curve parameter to **0.512** over the baseline Logistic Regression model score of **0.392**. Feature importance metrics mapped via permutation analysis verified that 7-day lagged rolling volatility holds the primary explanatory power for forecasting impending market contractions.
+- **Continuous Regression (Level Prediction):** Forecasting precise numerical daily returns yielded negative $R^2$ scores across all configurations (Random Forest $R^2 = -0.071$, Linear Regression $R^2 = -1.404$). In financial econometrics, this is an expected outcome consistent with the **Efficient Market Hypothesis (EMH)** and random walk characteristics of short-term returns; daily noise dominates, rendering point forecasts via historical lags ineffective against a naive mean benchmark.
+- **Categorical Risk Classification:** Shifting the objective from continuous level prediction to directional shock classification yielded meaningful risk management parameters. When augmented with `SMOTE` oversampling to counter extreme class imbalance, the Random Forest classifier attained an ROC-AUC of **0.512** (compared to 0.392 for baseline Logistic Regression). Feature importance via permutation analysis confirmed that **7-day rolling historical volatility** provided the primary explanatory signal for regime instability.
 
 ### Analytical Deep-Dive & Main Contributions
-By evaluating the crossover between financial theory and data engineering, this analysis provides three primary contributions to the understanding of emerging market microstructure dynamics:
-1. **Robust Non-Parametric Modeling under Fat-Tail Noise:** The confirmation of H1 and H2 validates the application of specialized statistical alternatives like Levene's and Mann-Whitney U tests on asset returns, bypassing Gaussian assumptions that mathematically fail during high-impact financial shocks.
-2. **Quantification of Indiscriminate Panic Thresholds:** The rejection of H3 provides empirical evidence that once a historical shock registers within an emerging market, participant sell-off distributions behave uniformly regardless of whether an event carries a *Medium, High,* or *Extreme* qualitative severity rating. 
-3. **Out-of-Sample Boundary Verification for AI in Finance:** The performance breakdown across the regression pipelines establishes an empirical benchmark demonstrating that simple statistical baselines remain more robust than complex ensemble algorithms for daily return estimation during periods of intense macroeconomic adjustment.
+By bridging empirical finance and data science pipelines, this study provides three core contributions:
+1. **Non-Parametric Evaluation under Heavy Tails:** Confirmed that asset returns deviate significantly from normality during shocks, validating the necessity of robust alternatives like Mann-Whitney U and Levene's tests over standard Student's t-tests.
+2. **Empirical Evidence of Indiscriminate Reaction (H3 Rejection):** Demonstrated that market drop severity does not scale linearly with qualitative labels (*Medium* vs. *Extreme*). Once an unexpected shock registers, market participants react indiscriminately with immediate capital preservation.
+3. **Information Efficiency & Lack of Persistence (H4 Rejection):** The absence of a lagged hangover effect ($T+1$) highlights high informational efficiency in Borsa Istanbul, where the vast majority of shock-induced adjustments are absorbed within the initial trading session.
 
 ---
 
@@ -142,41 +142,32 @@ DSA210_TermProject/
 │   └── processed/                           # Cleaned and merged analysis datasets
 │       ├── unified_bist_enriched.csv        # Main master dataset for ML and EDA
 │       ├── unified_bist_data.csv            # Base financial metrics
-│       └── shock_analysis_summary.csv       # Event-driven shock evaluations
+│       ├── shock_analysis_summary.csv       # Event-driven shock evaluations
+│       └── EEM_benchmark.csv                # Emerging Markets benchmark index (iShares MSCI EM)
 │
 ├── EDA/
 │   ├── EDA.ipynb                            # Complete EDA and baseline correlations
 │   └── Visualizations/                      # Standalone charts and plots
 │
 ├── hypothesis_testing/
-│   └── hypotesting.ipynb                    # T-tests, ANOVA, and structural break analysis
+│   └── hypotesting.ipynb                    # Non-parametric tests, ANOVA, and variance analysis
 │
 ├── ML_methods/
 │   └── ml_methods.ipynb                     # Classification, Regression, and SMOTE integration
 │
+├── advanced_econometric_analysis/            # (Optional Extension)
+│   └── advanced_econometric_analysis.ipynb  # GARCH(1,1) volatility & CAR Event Study models
+│
+├── DSA210_Final_Report.pdf                  # Comprehensive academic final project report
+├── DSA210_Project_Proposal_Yigit_Keskin.pdf # Initial project proposal
 ├── README.md
 └── requirements.txt
 ```
 
-## 🛠️ AI Tools & Assistance Disclosure
-
-In alignment with Sabancı University's Academic Integrity Policies for **DSA 210 – Introduction to Data Science**, this section outlines the comprehensive use of Large Language Model (LLM) assistance (Gemini) utilized during the final assembly, debugging, and documentation stages of this project.
-
-### 1. Scope of AI Assistance
-The AI tool was utilized strictly as an interactive development partner, code reviewer, and technical writer. 
-- **Core Analytics & Logic:** All data collection protocols via API scripts, statistical testing parameters (Mann-Whitney U, Levene's Test, ANOVA, lagged calculations), data cleaning configurations, and machine learning structures were conceptualized, written, and executed independently by the author.
-- **AI Utility:** The LLM was used to review raw python notebook logs, resolve dataframe timeline alignment conflicts, suggest clean stylistic palettes for visualization code blocks, translate localized variables into standardized financial English equivalents, and optimize the final report's Markdown styling to match institutional project standards.
-
-### 2. Specific Prompts & Generated Actions Matrix
-
-| Phase | Explicit User Intent / Prompt Provided | LLM Action & Output Generated |
-| :--- | :--- | :--- |
-| **EDA & Data Review** | Provided snippets of data collection scripts and raw directory screenshots to verify dataframe exports. | Reviewed pipeline file paths to confirm structural consistency across `data_collection/processed/` and updated the dataset tables. |
-| **Localization & Vocabulary** | Requested translation mapping to transition key search variables from Turkish into standard professional financial English. | Replaced localized index tracking strings with official macro-terms (*"dolar kuru"* $\rightarrow$ *"USD/TRY exchange rate"*; *"enflasyon"* $\rightarrow$ *"inflation rate"*). |
-| **Pipeline Integration** | Submitted raw notebook executions containing precise values for statistical tests (H1-H4) and out-of-sample ML metrics. | Compiled results cleanly into an academic **Statistical Test Suite Summary** table and parsed model constraints ($R^2$ metrics). |
-| **Report Formatting** | Provided an explicit markdown template structural example from a benchmark macroeconomic study. | Restructured the entire repository layout, methodology sections, and future work blocks to mirror the required formal format. |
-
-### 3. Verification & Human Oversight
-Every automated technical description, mathematical summary, and folder path generated by the LLM was manually audited, cross-verified against live local Jupyter Notebook runs, and approved by the author to ensure 100% factual accuracy prior to the repository's final chronological commit.
-
 ---
+
+## 🛠️ Academic Integrity & AI Assistance Disclosure
+
+In accordance with Sabancı University's Academic Integrity guidelines for **DSA 210 (Introduction to Data Science)**:
+- **Independent Work:** All research questions, hypotheses, data collection pipelines (via `yfinance` and TCMB EVDS APIs), statistical test executions, and machine learning models were independently designed, implemented, and analyzed by the author.
+- **AI Tool Usage:** Generative AI tools (Gemini / LLM assistance) were utilized strictly for assistive tasks, including code debugging, Markdown formatting, proofreading, and improving documentation structure. All generated text, numerical outputs, and interpretations were verified against the author's local Jupyter Notebook runs.
